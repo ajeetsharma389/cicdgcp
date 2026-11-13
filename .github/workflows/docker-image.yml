@@ -18,7 +18,12 @@ jobs:
     - name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v2
       with:
-        credentials_json: ${{ secrets.GCP_SA_KEY }}
+        # Paste the "Provider" path you copied from the GCP Console here:
+          workload_identity_provider: 'principal://iam.googleapis.com/projects/425369869110/locations/global/workloadIdentityPools/github-pool/subject/SUBJECT_ATTRIBUTE_VALUE'
+          
+          # Type your service account email directly here:
+          service_account: 'github-actions-pusher@iam-registry-lab.iam.gserviceaccount.com'
+
         
     - name: Configure Docker for Artifact Registry
       run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
